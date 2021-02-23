@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="189.0" y="270.5">com.rpm.arkanoid.entity.Ball</node>
+    <node x="0.0" y="596.0">com.rpm.arkanoid.blocs.BlocVermell</node>
+    <node x="0.0" y="259.0">com.rpm.arkanoid.entity.Pala</node>
+    <node x="156.0" y="596.0">com.rpm.arkanoid.blocs.BlocVerd</node>
+    <node x="209.97222222222217" y="90.0">com.rpm.arkanoid.entity.Entity</node>
+    <node x="288.0" y="596.0">com.rpm.arkanoid.blocs.BlocBlau</node>
+    <node x="144.0" y="381.0">com.rpm.arkanoid.blocs.Bloc</node>
+    <node x="445.0" y="381.0">com.rpm.arkanoid.escene.Scene</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.rpm.arkanoid.entity.Ball" target="com.rpm.arkanoid.entity.Entity">
+      <point x="0.0" y="-27.0" />
+      <point x="254.0" y="234.0" />
+      <point x="200.0" y="234.0" />
+      <point x="30.75" y="104.5" />
+    </edge>
+    <edge source="com.rpm.arkanoid.entity.Pala" target="com.rpm.arkanoid.entity.Entity">
+      <point x="0.0" y="-38.5" />
+      <point x="84.5" y="234.0" />
+      <point x="138.5" y="234.0" />
+      <point x="-30.75" y="104.5" />
+    </edge>
+    <edge source="com.rpm.arkanoid.blocs.BlocVermell" target="com.rpm.arkanoid.blocs.Bloc">
+      <point x="0.0" y="-15.0" />
+      <point x="68.0" y="571.0" />
+      <point x="166.66666666666666" y="571.0" />
+      <point x="-45.33333333333334" y="82.5" />
+    </edge>
+    <edge source="com.rpm.arkanoid.blocs.BlocVerd" target="com.rpm.arkanoid.blocs.Bloc">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="82.5" />
+    </edge>
+    <edge source="com.rpm.arkanoid.blocs.BlocBlau" target="com.rpm.arkanoid.blocs.Bloc">
+      <point x="0.0" y="-15.0" />
+      <point x="344.0" y="571.0" />
+      <point x="257.33333333333337" y="571.0" />
+      <point x="45.33333333333337" y="82.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="208.55555555555554" y="272.77777777777777" />
+  <SelectedNodes>
+    <node>com.rpm.arkanoid.entity.Entity</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
