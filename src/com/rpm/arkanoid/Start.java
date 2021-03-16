@@ -18,6 +18,8 @@ public class Start {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(main);
 
+        frame.requestFocus();
+
         frame.setVisible(true);
 
         main.start();
