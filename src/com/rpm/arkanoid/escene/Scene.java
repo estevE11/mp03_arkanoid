@@ -2,6 +2,7 @@ package com.rpm.arkanoid.escene;
 
 import com.rpm.arkanoid.Main;
 import com.rpm.arkanoid.blocs.Bloc;
+import com.rpm.arkanoid.blocs.BlocBlau;
 import com.rpm.arkanoid.entity.Ball;
 import com.rpm.arkanoid.entity.Entity;
 import com.rpm.arkanoid.entity.Pala;
@@ -31,6 +32,18 @@ public class Scene {
         this.ball = new Ball(main, this.pala);
         this.entities.add(this.ball);
         this.entities.add(this.pala);
+
+        this.generateLevel();
+    }
+
+    public void generateLevel() {
+        this.blocs = new Bloc[Bloc.COLS][Bloc.ROWS];
+
+        for(int y = 0; y < this.blocs[0].length; y++) {
+            for(int x = 0; x < this.blocs.length; x++) {
+                this.blocs[x][y] = new BlocBlau(x, y);
+            }
+        }
     }
 
     public void update(){
@@ -42,6 +55,14 @@ public class Scene {
     public void render(Graphics g){
         for (Entity e : this.entities) {
             e.render(g);
+        }
+
+        for(int y = 0; y < this.blocs[0].length; y++) {
+            for(int x = 0; x < this.blocs.length; x++) {
+                Bloc b = this.blocs[x][y];
+                if(b.getVida() > 0)
+                    this.blocs[x][y].render(g);
+            }
         }
     }
 

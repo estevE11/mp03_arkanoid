@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Start {
+    public static final int WIDTH = 640, HEIGHT = 480;
+
 
     public static void main(String args[]) {
         Main main = new Main();

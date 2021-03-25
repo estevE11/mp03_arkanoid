@@ -4,7 +4,7 @@ public class BlocVerd extends Bloc{
 
     protected int maxVida = 3;
 
-    public BlocVerd(){
-        super();
+    public BlocVerd(int x, int y){
+        super(x, y, 3);
     }
 }
