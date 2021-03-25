@@ -39,7 +39,9 @@ public class Ball extends Entity{
 
         if(this.y + this.h > this.pala.getY() && this.y < this.pala.getY() + this.pala.getH() && this.x + this.w > this.pala.getX() && this.x < this.pala.getX() + this.pala.getW()) {
             this.y = this.pala.getY() - this.h -1;
+            double bounceDist = ((this.x - this.pala.getX())*2/this.pala.getW())-1;
             this.vy *= -1;
+            this.vx = bounceDist/10;
         }
     }
 
