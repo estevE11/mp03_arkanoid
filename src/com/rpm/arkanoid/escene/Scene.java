@@ -28,8 +28,8 @@ public class Scene {
         this.main = main;
         this.entities = new LinkedList<Entity>();
 
-        this.pala = new Pala(main);
-        this.ball = new Ball(main, this.pala);
+        this.pala = new Pala(main, this);
+        this.ball = new Ball(main, this, this.pala);
         this.entities.add(this.ball);
         this.entities.add(this.pala);
 
@@ -39,8 +39,8 @@ public class Scene {
     public void generateLevel() {
         this.blocs = new Bloc[Bloc.COLS][Bloc.ROWS];
 
-        for(int y = 0; y < this.blocs[0].length; y++) {
-            for(int x = 0; x < this.blocs.length; x++) {
+        for(int y = 0; y < Bloc.ROWS; y++) {
+            for(int x = 0; x < Bloc.COLS; x++) {
                 this.blocs[x][y] = new BlocBlau(x, y);
             }
         }
@@ -50,24 +50,28 @@ public class Scene {
         for (Entity e : this.entities) {
             e.update();
         }
+
+        for(int y = 0; y < Bloc.ROWS; y++) {
+            for(int x = 0; x < Bloc.COLS; x++) {
+                if(this.ball.getY() < y * Bloc.H + Bloc.H && this.ball.getY() + this.ball.getH() > y * Bloc.H && this.ball.getX() + this.ball.getW() > x * Bloc.W && this.ball.getX() < x * Bloc.W + Bloc.W) {
+                    this.blocs[x][y].setVida(0);
+                }
+            }
+        }
     }
 
     public void render(Graphics g){
         for (Entity e : this.entities) {
             e.render(g);
         }
-
-        for(int y = 0; y < this.blocs[0].length; y++) {
-            for(int x = 0; x < this.blocs.length; x++) {
-                Bloc b = this.blocs[x][y];
-                if(b.getVida() > 0)
-                    this.blocs[x][y].render(g);
-            }
-        }
     }
 
     private void checkCollisions(){
 
+    }
+
+    public Bloc[][] getBlocs() {
+        return this.blocs;
     }
 
     public void onKeyPressed(KeyEvent e)  {

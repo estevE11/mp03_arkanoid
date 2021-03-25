@@ -7,8 +7,8 @@ import com.rpm.arkanoid.entity.Pala;
 import java.awt.*;
 
 public class Bloc {
-    public static final int ROWS = 5, COLS = 10;
-    public static final int W = Start.WIDTH/ROWS, H = 30;
+    public static final int ROWS = 5, COLS = 15;
+    public static final int W = Start.WIDTH/COLS, H = 30;
 
     protected int x, y;
 
@@ -37,4 +37,8 @@ public class Bloc {
     public int getVida() {
         return vida;
     }
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
 }
+

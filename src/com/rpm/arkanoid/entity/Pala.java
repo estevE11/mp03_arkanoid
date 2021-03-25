@@ -1,6 +1,7 @@
 package com.rpm.arkanoid.entity;
 
 import com.rpm.arkanoid.Main;
+import com.rpm.arkanoid.escene.Scene;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -9,8 +10,8 @@ public class Pala extends Entity {
 
     protected double velocity = .2;
 
-    public Pala(Main main) {
-        super(main);
+    public Pala(Main main, Scene scene) {
+        super(main, scene);
 
         this.y = 400;
 

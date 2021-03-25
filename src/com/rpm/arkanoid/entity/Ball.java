@@ -1,6 +1,8 @@
 package com.rpm.arkanoid.entity;
 
 import com.rpm.arkanoid.Main;
+import com.rpm.arkanoid.blocs.Bloc;
+import com.rpm.arkanoid.escene.Scene;
 
 import java.awt.*;
 
@@ -9,8 +11,8 @@ public class Ball extends Entity{
 
     protected double velocity;
 
-    public Ball(Main main, Pala pala) {
-        super(main);
+    public Ball(Main main, Scene scene, Pala pala) {
+        super(main, scene);
         this.pala = pala;
 
         this.vx = .1;
@@ -35,7 +37,6 @@ public class Ball extends Entity{
         if(this.x < 0) {
             this.vx *= -1;
         }
-
 
         if(this.y + this.h > this.pala.getY() && this.y < this.pala.getY() + this.pala.getH() && this.x + this.w > this.pala.getX() && this.x < this.pala.getX() + this.pala.getW()) {
             this.y = this.pala.getY() - this.h -1;
