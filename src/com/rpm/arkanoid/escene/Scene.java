@@ -3,6 +3,8 @@ package com.rpm.arkanoid.escene;
 import com.rpm.arkanoid.Main;
 import com.rpm.arkanoid.blocs.Bloc;
 import com.rpm.arkanoid.blocs.BlocBlau;
+import com.rpm.arkanoid.blocs.BlocVerd;
+import com.rpm.arkanoid.blocs.BlocVermell;
 import com.rpm.arkanoid.entity.Ball;
 import com.rpm.arkanoid.entity.Entity;
 import com.rpm.arkanoid.entity.Pala;
@@ -11,8 +13,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Scene {
+    private Random r = new Random();
 
     protected Main main;
 
@@ -41,7 +45,18 @@ public class Scene {
 
         for(int y = 0; y < Bloc.ROWS; y++) {
             for(int x = 0; x < Bloc.COLS; x++) {
-                this.blocs[x][y] = new BlocBlau(x, y);
+                int blocId = r.nextInt(3);
+                switch (blocId) {
+                    case 0:
+                        this.blocs[x][y] = new BlocBlau(x, y);
+                        break;
+                    case 1:
+                        this.blocs[x][y] = new BlocVermell(x, y);
+                        break;
+                    case 2:
+                        this.blocs[x][y] = new BlocVerd(x, y);
+                        break;
+                }
             }
         }
     }
@@ -53,9 +68,8 @@ public class Scene {
 
         for(int y = 0; y < Bloc.ROWS; y++) {
             for(int x = 0; x < Bloc.COLS; x++) {
-                if(this.ball.getY() < y * Bloc.H + Bloc.H && this.ball.getY() + this.ball.getH() > y * Bloc.H && this.ball.getX() + this.ball.getW() > x * Bloc.W && this.ball.getX() < x * Bloc.W + Bloc.W) {
-                    this.blocs[x][y].setVida(0);
-                }
+                if(this.blocs[x][y] == null) continue;
+                if(this.blocs[x][y].getVida() <= 0) this.blocs[x][y] = null;
             }
         }
     }
@@ -64,10 +78,31 @@ public class Scene {
         for (Entity e : this.entities) {
             e.render(g);
         }
+
+        for(int y = 0; y < Bloc.ROWS; y++) {
+            for(int x = 0; x < Bloc.COLS; x++) {
+                if(this.blocs[x][y] == null) continue;
+                this.blocs[x][y].render(g);
+            }
+        }
     }
 
-    private void checkCollisions(){
+    public void collidedWith(int bx, int by) {
+        this.blocs[bx][by].onCollide();
+    }
 
+    public boolean blockAt(int x, int y) {
+        int bx = x/Bloc.W;
+        int by = y/Bloc.H;
+        if(bx < 0 || bx >= Bloc.COLS || by < 0 || by >= Bloc.ROWS) return false;
+        return this.blocs[bx][by] != null;
+    }
+
+    public Bloc getBlockAt(int x, int y) {
+        int bx = x/Bloc.W;
+        int by = y/Bloc.H;
+        if(bx < 0 || bx >= Bloc.COLS || by < 0 || by >= Bloc.ROWS) return null;
+        return this.blocs[bx][by];
     }
 
     public Bloc[][] getBlocs() {

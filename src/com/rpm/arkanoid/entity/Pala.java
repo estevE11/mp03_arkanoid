@@ -13,7 +13,7 @@ public class Pala extends Entity {
     public Pala(Main main, Scene scene) {
         super(main, scene);
 
-        this.y = 400;
+        this.y = 630;
 
         this.vx = 0;
 

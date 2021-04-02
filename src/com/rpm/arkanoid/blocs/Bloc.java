@@ -30,6 +30,11 @@ public class Bloc {
         g.fillRect(this.x*this.W + this.border, this.y*this.H + this.border, W-this.border/2, H-this.border/2);
     }
 
+    public void onCollide() {
+        System.out.println("collided");
+        this.vida = 0;
+    }
+
     public void onDie(Pala p){
 
     }
