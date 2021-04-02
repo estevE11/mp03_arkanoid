@@ -79,8 +79,8 @@ public class Ball extends Entity{
         boolean solid = false;
 
         for(int c = 0; c < 4; c++) {
-            int xt = ((int)this.x + (int)xa) + c % 2 * Bloc.W;
-            int yt = ((int)this.y + (int)ya) + c / 2 * Bloc.H;
+            int xt = ((int)this.x + (int)xa) + c % 2 * this.w;
+            int yt = ((int)this.y + (int)ya) + c / 2 * this.h;
 
             if(this.scene.blockAt(xt, yt)) {
                 this.scene.getBlockAt(xt, yt).onCollide();
