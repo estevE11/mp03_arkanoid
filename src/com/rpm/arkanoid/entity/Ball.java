@@ -15,8 +15,8 @@ public class Ball extends Entity{
         super(main, scene);
         this.pala = pala;
 
-        this.vx = .1;
-        this.vy = .1;
+        this.vx = 5;
+        this.vy = 5;
 
         this.w = 16;
         this.h = 16;

@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 public class Pala extends Entity {
 
-    protected double velocity = .2;
+    protected double velocity = 15;
 
     public Pala(Main main, Scene scene) {
         super(main, scene);
