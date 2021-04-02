@@ -15,14 +15,14 @@ public class Ball extends Entity{
         super(main, scene);
         this.pala = pala;
 
-        this.x = 500;
-        this.y = 500;
-
-        this.vx = 5;
-        this.vy = 5;
-
         this.w = 16;
         this.h = 16;
+
+        this.x = (this.pala.getX() + this.pala.getW()/2) - this.w/2;
+        this.y = this.pala.getY() - this.pala.getH() - 10;
+
+        this.vx = 0;
+        this.vy = 0;
     }
 
     public void update() {
@@ -103,7 +103,8 @@ public class Ball extends Entity{
     }
 
     public void fire(double a) {
-
+        this.vx = Math.cos(a)*10;
+        this.vy = Math.sin(a)*10;
     }
 
     public void render(Graphics g) {

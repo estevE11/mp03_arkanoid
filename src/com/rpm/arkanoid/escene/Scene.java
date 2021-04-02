@@ -32,8 +32,9 @@ public class Scene {
         this.main = main;
         this.entities = new LinkedList<Entity>();
 
-        this.pala = new Pala(main, this);
+        this.pala = new Pala(main, this, null);
         this.ball = new Ball(main, this, this.pala);
+        this.pala.setBall(this.ball);
         this.entities.add(this.ball);
         this.entities.add(this.pala);
 
