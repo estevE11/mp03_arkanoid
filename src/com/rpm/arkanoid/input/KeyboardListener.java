@@ -20,7 +20,6 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("buenas");
         this.main.keyPressed(e);
     }
 
