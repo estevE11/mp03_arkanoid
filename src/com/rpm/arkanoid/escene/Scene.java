@@ -25,20 +25,12 @@ public class Scene {
 
     protected int score = 0;
 
-    private final Pala pala;
+    private Pala pala;
     private Ball ball;
 
     public Scene(Main main) {
         this.main = main;
-        this.entities = new LinkedList<Entity>();
-
-        this.pala = new Pala(main, this, null);
-        this.ball = new Ball(main, this, this.pala);
-        this.pala.setBall(this.ball);
-        this.entities.add(this.ball);
-        this.entities.add(this.pala);
-
-        this.generateLevel();
+        this.restart();
     }
 
     public void generateLevel() {
@@ -71,8 +63,8 @@ public class Scene {
             for(int x = 0; x < Bloc.COLS; x++) {
                 if(this.blocs[x][y] == null) continue;
                 if(this.blocs[x][y].getVida() <= 0) {
-                    this.blocs[x][y] = null;
                     this.blocs[x][y].onDie(this.pala);
+                    this.blocs[x][y] = null;
                     continue;
                 }
                 this.blocs[x][y].update();
@@ -94,7 +86,15 @@ public class Scene {
     }
 
     public void restart() {
+        this.entities = new LinkedList<Entity>();
 
+        this.pala = new Pala(main, this, null);
+        this.ball = new Ball(main, this, this.pala);
+        this.pala.setBall(this.ball);
+        this.entities.add(this.ball);
+        this.entities.add(this.pala);
+
+        this.generateLevel();
     }
 
     public void collidedWith(int bx, int by) {

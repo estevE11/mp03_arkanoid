@@ -12,6 +12,9 @@ public class Pala extends Entity {
     private Ball ball;
 
     protected double velocity = 15;
+    private boolean inBoost = false;
+    private final int maxSpeedBoostTime = 10*1000;
+    private int speedBoostTime = 0;
 
     private final int STATE_FIRE = 0, STATE_MOVE = 1;
     private int state = 0;
@@ -47,6 +50,16 @@ public class Pala extends Entity {
             if(this.x+this.w > this.main.getWidth()) {
                 this.x = this.main.getWidth() - this.w;
             }
+
+            if(this.inBoost) {
+                this.speedBoostTime++;
+                if(this.speedBoostTime > this.maxSpeedBoostTime) {
+                    this.inBoost = false;
+                    this.velocity = 15;
+                    this.speedBoostTime = 0;
+                }
+            }
+
         } else if(this.state == this.STATE_FIRE) {
             this.ball_angle += this.ball_angle_v;
             if(this.ball_angle < -Math.PI/2-Math.PI/4) this.ball_angle = -Math.PI/2-Math.PI/4;
@@ -72,8 +85,10 @@ public class Pala extends Entity {
         this.state = this.STATE_MOVE;
     }
 
-    protected void giveSpeedBoost(){
-
+    public void giveSpeedBoost(){
+        this.inBoost = true;
+        this.speedBoostTime = 0;
+        this.velocity = 25;
     }
 
     public void onKeyPressed(KeyEvent e) {

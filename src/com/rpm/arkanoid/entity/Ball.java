@@ -32,7 +32,7 @@ public class Ball extends Entity{
         this._move((int)this.vx, (int)this.vy);
 
         if(this.y+this.h > this.main.getHeight()) {
-            this.vy *= -1;
+            this.scene.restart();
         }
         if(this.x+this.w > this.main.getWidth()) {
             this.vx *= -1;
