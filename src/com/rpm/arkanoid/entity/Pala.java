@@ -23,6 +23,11 @@ public class Pala extends Entity {
         super(main, scene);
         this.ball = ball;
 
+        this.init();
+
+    }
+
+    public void init() {
         this.w = 60;
         this.h = 10;
 
@@ -30,7 +35,6 @@ public class Pala extends Entity {
         this.y = 630;
 
         this.vx = 0;
-
     }
 
     public void update() {
@@ -90,7 +94,7 @@ public class Pala extends Entity {
                 this.ball_angle_v = -.05;
             }
 
-            if(keyCode == KeyEvent.VK_SPACE) this.fire();
+            if(keyCode == KeyEvent.VK_SPACE || keyCode == KeyEvent.VK_UP) this.fire();
         }
     }
 

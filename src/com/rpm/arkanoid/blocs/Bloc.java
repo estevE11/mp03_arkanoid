@@ -19,20 +19,45 @@ public class Bloc {
 
     private int border = 2;
 
+    private boolean onDieAnimation = false;
+    private int onDieAnimTime = 0;
+    private final int onDieAnimMaxTime = 15;
+
+
     public Bloc(int x, int y, int maxVida) {
         this.x = x;
         this.y = y;
         this.vida = maxVida;
     }
 
+    public void update() {
+        if(this.onDieAnimation) {
+            this.onDieAnimTime++;
+            if(this.onDieAnimMaxTime < this.onDieAnimTime) {
+                this.onDieAnimation = false;
+                this.onDieAnimTime = 0;
+            }
+        }
+    }
+
     public void render(Graphics g) {
+        int x = this.x*W + this.border;
+        int y = this.y*H + this.border;
+        int w = W-this.border/2;
+        int h = H-this.border/2;
         g.setColor(this.c);
-        g.fillRect(this.x*this.W + this.border, this.y*this.H + this.border, W-this.border/2, H-this.border/2);
+        g.fillRect(x, y, w, h);
+
+        if (this.onDieAnimation) {
+            g.setColor(Color.black);
+            g.fillRect(x, y + (h*this.onDieAnimTime/this.onDieAnimMaxTime), w, 10);
+        }
     }
 
     public void onCollide() {
-        System.out.println("collided");
-        this.vida = 0;
+        this.vida--;
+        this.onDieAnimation = true;
+        System.out.println(this.vida);
     }
 
     public void onDie(Pala p){

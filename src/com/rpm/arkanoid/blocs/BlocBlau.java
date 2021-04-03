@@ -4,10 +4,8 @@ import java.awt.*;
 
 public class BlocBlau extends Bloc{
 
-    protected int maxVida = 2;
-
     public BlocBlau(int x, int y){
-        super(x, y, 3);
+        super(x, y, 2);
         this.c = Color.BLUE;
     }
 }

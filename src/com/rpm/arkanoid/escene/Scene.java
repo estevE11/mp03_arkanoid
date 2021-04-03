@@ -70,7 +70,12 @@ public class Scene {
         for(int y = 0; y < Bloc.ROWS; y++) {
             for(int x = 0; x < Bloc.COLS; x++) {
                 if(this.blocs[x][y] == null) continue;
-                if(this.blocs[x][y].getVida() <= 0) this.blocs[x][y] = null;
+                if(this.blocs[x][y].getVida() <= 0) {
+                    this.blocs[x][y] = null;
+                    this.blocs[x][y].onDie(this.pala);
+                    continue;
+                }
+                this.blocs[x][y].update();
             }
         }
     }
@@ -86,6 +91,10 @@ public class Scene {
                 this.blocs[x][y].render(g);
             }
         }
+    }
+
+    public void restart() {
+
     }
 
     public void collidedWith(int bx, int by) {

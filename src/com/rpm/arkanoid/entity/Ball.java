@@ -14,9 +14,12 @@ public class Ball extends Entity{
     public Ball(Main main, Scene scene, Pala pala) {
         super(main, scene);
         this.pala = pala;
+        this.init();
+    }
 
-        this.w = 16;
-        this.h = 16;
+    public void init() {
+        this.w = 14;
+        this.h = 14;
 
         this.x = (this.pala.getX() + this.pala.getW()/2) - this.w/2;
         this.y = this.pala.getY() - this.pala.getH() - 10;
@@ -43,13 +46,10 @@ public class Ball extends Entity{
 
         if(this.y + this.h > this.pala.getY() && this.y < this.pala.getY() + this.pala.getH() && this.x + this.w > this.pala.getX() && this.x < this.pala.getX() + this.pala.getW()) {
             this.y = this.pala.getY() - this.h -1;
-            double bounceDist = calcBounceVel();
+            double bounceDist = this.calcBounceVel();
             this.vy *= -1;
             this.vx = bounceDist*12;
         }
-
-        boolean a = this.scene.blockAt((int)this.x, (int)this.y);
-        if(a) System.out.println(a);
     }
 
     public void _move(int vx, int vy) {
@@ -78,12 +78,17 @@ public class Ball extends Entity{
     public boolean collision(double xa, double ya) {
         boolean solid = false;
 
+        boolean col = false;
+
         for(int c = 0; c < 4; c++) {
             int xt = ((int)this.x + (int)xa) + c % 2 * this.w;
             int yt = ((int)this.y + (int)ya) + c / 2 * this.h;
 
             if(this.scene.blockAt(xt, yt)) {
-                this.scene.getBlockAt(xt, yt).onCollide();
+                if(!col) {
+                    this.scene.getBlockAt(xt, yt).onCollide();
+                    col = true;
+                }
                 solid = true;
             }
         }
@@ -109,7 +114,7 @@ public class Ball extends Entity{
 
     public void render(Graphics g) {
         g.setColor(Color.red);
-        g.fillRect((int)this.x, (int)this.y, this.w, this.h);
+        g.fillOval((int)this.x, (int)this.y, this.w, this.h);
     }
 
 

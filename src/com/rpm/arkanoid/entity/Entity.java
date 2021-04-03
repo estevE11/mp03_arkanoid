@@ -22,6 +22,10 @@ public class Entity {
         this.scene = scene;
     }
 
+    public void init() {
+
+    }
+
     public void update() {
     }
 
