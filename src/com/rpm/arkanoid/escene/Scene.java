@@ -28,9 +28,12 @@ public class Scene {
     private Pala pala;
     private Ball ball;
 
+    private int lives = 3;
+
     public Scene(Main main) {
         this.main = main;
         this.restart();
+        this.generateLevel();
     }
 
     public void generateLevel() {
@@ -57,6 +60,13 @@ public class Scene {
     public void update(){
         for (Entity e : this.entities) {
             e.update();
+            for (Entity other : this.entities) {
+                if(e != other) {
+                    if(Entity.areColliding(e, other)) {
+                        e.collision(other);
+                    }
+                }
+            }
         }
 
         for(int y = 0; y < Bloc.ROWS; y++) {
@@ -83,7 +93,13 @@ public class Scene {
                 this.blocs[x][y].render(g);
             }
         }
+
+        for(int i = 0; i < this.lives; i++) {
+            g.setColor(Color.red);
+            g.fillRect(10 + i*15, 660, 10, 20);
+        }
     }
+
 
     public void restart() {
         this.entities = new LinkedList<Entity>();
@@ -94,7 +110,11 @@ public class Scene {
         this.entities.add(this.ball);
         this.entities.add(this.pala);
 
-        this.generateLevel();
+        //this.generateLevel();
+    }
+
+    public void add(Entity e) {
+        this.entities.add(e);
     }
 
     public void collidedWith(int bx, int by) {
@@ -113,6 +133,13 @@ public class Scene {
         int by = y/Bloc.H;
         if(bx < 0 || bx >= Bloc.COLS || by < 0 || by >= Bloc.ROWS) return null;
         return this.blocs[bx][by];
+    }
+
+    public void removeLive() {
+        this.lives--;
+        if(this.lives <= 0) {
+            System.exit(0);
+        }
     }
 
     public Bloc[][] getBlocs() {

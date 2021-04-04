@@ -91,6 +91,12 @@ public class Pala extends Entity {
         this.velocity = 18;
     }
 
+    public void collision(Entity other) {
+        if(other instanceof EntityBlocVermell) {
+            System.exit(0);
+        }
+    }
+
     public void onKeyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
@@ -131,6 +137,14 @@ public class Pala extends Entity {
                 this.ball_angle_v = 0;
             }
         }
+    }
+
+    public Scene getScene() {
+        return this.scene;
+    }
+
+    public Main getMain() {
+        return this.main;
     }
 
     public void setBall(Ball ball) {

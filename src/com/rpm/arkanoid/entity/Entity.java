@@ -34,9 +34,17 @@ public class Entity {
 
     }
 
+    public void collision(Entity other) {
+
+    }
+
     protected void move() {
         this.x += this.vx;
         this.y += this.vy;
+    }
+
+    public static boolean areColliding(Entity e0, Entity e1) {
+        return e0.getX() + e0.getW() > e1.getX() && e0.getX() < e1.getX() + e1.getW() && e0.getY() + e0.getH() > e1.getY() && e0.getY() < e1.getY() + e1.getH();
     }
 
     public double getX() {
@@ -53,5 +61,10 @@ public class Entity {
 
     public int getW() {
         return w;
+    }
+
+    public void setPosistion(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }

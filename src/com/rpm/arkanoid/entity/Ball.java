@@ -33,6 +33,7 @@ public class Ball extends Entity{
 
         if(this.y+this.h > this.main.getHeight()) {
             this.scene.restart();
+            this.scene.removeLive();
         }
         if(this.x+this.w > this.main.getWidth()) {
             this.vx *= -1;
