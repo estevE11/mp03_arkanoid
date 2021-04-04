@@ -11,7 +11,7 @@ public class Pala extends Entity {
 
     private Ball ball;
 
-    protected double velocity = 15;
+    protected double velocity = 13;
     private boolean inBoost = false;
     private final int maxSpeedBoostTime = 10*1000;
     private int speedBoostTime = 0;
@@ -88,7 +88,7 @@ public class Pala extends Entity {
     public void giveSpeedBoost(){
         this.inBoost = true;
         this.speedBoostTime = 0;
-        this.velocity = 25;
+        this.velocity = 18;
     }
 
     public void onKeyPressed(KeyEvent e) {
