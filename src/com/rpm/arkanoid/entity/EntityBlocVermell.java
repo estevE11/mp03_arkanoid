@@ -9,6 +9,8 @@ import java.awt.*;
 public class EntityBlocVermell extends Entity {
     public EntityBlocVermell(Main main, Scene scene) {
         super(main, scene);
+        this.w = Bloc.W;
+        this.h = Bloc.H;
     }
 
     public void update() {
@@ -17,6 +19,6 @@ public class EntityBlocVermell extends Entity {
 
     public void render(Graphics g) {
         g.setColor(Color.red);
-        g.fillRect((int)this.x, (int)this.y, Bloc.W, Bloc.H);
+        g.fillRect((int)this.x, (int)this.y, this.w, this.h);
     }
 }
