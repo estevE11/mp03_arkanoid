@@ -2,6 +2,8 @@ package com.rpm.arkanoid;
 
 import com.rpm.arkanoid.escene.Scene;
 import com.rpm.arkanoid.input.KeyboardListener;
+import com.rpm.arkanoid.states.State;
+import com.rpm.arkanoid.states.StateGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +13,7 @@ import java.awt.image.BufferStrategy;
 
 public class Main extends Canvas implements Runnable {
     private Thread mainThread;
-    private Scene scene;
+    private State state;
     private KeyboardListener kb;
 
     private boolean running = true;
@@ -20,7 +22,7 @@ public class Main extends Canvas implements Runnable {
 
     private void init() {
         this.requestFocus();
-        this.scene = new Scene(this);
+        this.state = new StateGame(this);
         this.kb = new KeyboardListener(this);
 
         this.addKeyListener(this.kb);
@@ -55,7 +57,7 @@ public class Main extends Canvas implements Runnable {
     }
 
     public void update() {
-        this.scene.update();
+        this.state.update();
     }
 
     public void render() {
@@ -70,18 +72,18 @@ public class Main extends Canvas implements Runnable {
         g.setColor(Color.black);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-        this.scene.render(g);
+        this.state.render(g);
 
         g.dispose();
         bs.show();
     }
 
     public void keyPressed(KeyEvent e) {
-        this.scene.onKeyPressed(e);
+        this.state.onKeyPressed(e);
     }
 
     public void keyReleased(KeyEvent e) {
-        this.scene.onKeyReleased(e);
+        this.state.onKeyReleased(e);
     }
 
     public void start() {
