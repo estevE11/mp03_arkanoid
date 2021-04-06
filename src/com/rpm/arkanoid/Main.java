@@ -1,9 +1,11 @@
 package com.rpm.arkanoid;
 
 import com.rpm.arkanoid.escene.Scene;
+import com.rpm.arkanoid.gfx.Art;
 import com.rpm.arkanoid.input.KeyboardListener;
 import com.rpm.arkanoid.states.State;
 import com.rpm.arkanoid.states.StateGame;
+import com.rpm.arkanoid.states.StateMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,10 +24,12 @@ public class Main extends Canvas implements Runnable {
 
     private void init() {
         this.requestFocus();
-        this.state = new StateGame(this);
+        this.state = new StateMenu(this);
         this.kb = new KeyboardListener(this);
 
         this.addKeyListener(this.kb);
+
+        Art.i.load();
     }
 
     public void run() {
@@ -84,6 +88,10 @@ public class Main extends Canvas implements Runnable {
 
     public void keyReleased(KeyEvent e) {
         this.state.onKeyReleased(e);
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
     public void start() {

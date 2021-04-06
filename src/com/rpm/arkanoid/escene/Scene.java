@@ -8,6 +8,7 @@ import com.rpm.arkanoid.blocs.BlocVermell;
 import com.rpm.arkanoid.entity.Ball;
 import com.rpm.arkanoid.entity.Entity;
 import com.rpm.arkanoid.entity.Pala;
+import com.rpm.arkanoid.states.StateMenu;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -138,7 +139,7 @@ public class Scene {
     public void removeLive() {
         this.lives--;
         if(this.lives <= 0) {
-            System.exit(0);
+            this.main.setState(new StateMenu(this.main));
         }
     }
 

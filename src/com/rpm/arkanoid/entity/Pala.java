@@ -3,6 +3,7 @@ package com.rpm.arkanoid.entity;
 import com.rpm.arkanoid.Main;
 import com.rpm.arkanoid.Start;
 import com.rpm.arkanoid.escene.Scene;
+import com.rpm.arkanoid.states.StateMenu;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -93,7 +94,7 @@ public class Pala extends Entity {
 
     public void collision(Entity other) {
         if(other instanceof EntityBlocVermell) {
-            System.exit(0);
+            this.main.setState(new StateMenu(this.main));
         }
     }
 
