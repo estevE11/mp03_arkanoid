@@ -9,6 +9,7 @@ import com.rpm.arkanoid.entity.Ball;
 import com.rpm.arkanoid.entity.Entity;
 import com.rpm.arkanoid.entity.Pala;
 import com.rpm.arkanoid.states.StateMenu;
+import com.rpm.arkanoid.utils.FileUtils;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -25,6 +26,7 @@ public class Scene {
     protected LinkedList<Entity> entities;
 
     protected int score = 0;
+    protected int hiscore = 0;
 
     private Pala pala;
     private Ball ball;
@@ -33,6 +35,7 @@ public class Scene {
 
     public Scene(Main main) {
         this.main = main;
+        this.loadScore();
         this.restart();
         this.generateLevel();
     }
@@ -75,6 +78,8 @@ public class Scene {
                 if(this.blocs[x][y] == null) continue;
                 if(this.blocs[x][y].getVida() <= 0) {
                     this.blocs[x][y].onDie(this.pala);
+                    this.score += 250;
+                    if(this.score > this.hiscore) this.hiscore = this.score;
                     this.blocs[x][y] = null;
                     continue;
                 }
@@ -99,6 +104,13 @@ public class Scene {
             g.setColor(Color.red);
             g.fillRect(10 + i*15, 660, 10, 20);
         }
+
+        g.setColor(Color.white);
+        g.setColor(Color.lightGray);
+        g.setFont(new Font("Arial", Font.BOLD, 18));
+        g.drawString("Score: " + this.score, 580, 660);
+        g.setFont(new Font("Arial", Font.BOLD, 14));
+        g.drawString("High Score: " + this.hiscore, 580, 675);
     }
 
 
@@ -122,6 +134,15 @@ public class Scene {
         this.blocs[bx][by].onCollide();
     }
 
+    private void loadScore() {
+        this.hiscore = Integer.parseInt(FileUtils.read_file_by_line("res/saves/highscore.sav"));
+        System.out.println("Loaded highscore" + this.hiscore);
+    }
+
+    private void saveScore() {
+        FileUtils.write_file(this.hiscore+"", "res/saves/highscore.sav");
+    }
+
     public boolean blockAt(int x, int y) {
         int bx = x/Bloc.W;
         int by = y/Bloc.H;
@@ -140,6 +161,7 @@ public class Scene {
         this.lives--;
         if(this.lives <= 0) {
             this.main.setState(new StateMenu(this.main));
+            this.saveScore();
         }
     }
 
@@ -153,6 +175,18 @@ public class Scene {
 
     public void onKeyReleased(KeyEvent e)  {
         this.pala.onKeyReleased(e);
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void addScore(int score) {
+        this.score += score;
+    }
+
+    public void getScore(int score) {
+        this.score += score;
     }
 
 }
